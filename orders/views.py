@@ -1,5 +1,5 @@
 from django.views import generic
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, reverse
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from decimal import Decimal
@@ -44,9 +44,10 @@ class OrderCreateView(LoginRequiredMixin, generic.View):
                     item.product.total_sell += item.quantity
                     item.product.save()
                 cart.items.all().delete()
-            messages.success(request, "!فاکتور شما آماده پرداخت است")
-            return redirect('order-detail', obj.id)
-        return redirect('home')
+                messages.success(request, "!فاکتور شما آماده پرداخت است")
+                return redirect('order-detail', obj.id)
+        messages.error(self.request, "لطفا اطلاعات را به درستی وارد کنید")
+        return redirect('cart-detail')
 
 
 class OrderDetailView(LoginRequiredMixin, generic.DetailView):
@@ -62,13 +63,14 @@ class OrderDetailView(LoginRequiredMixin, generic.DetailView):
         return order_obj
 
 
+
 class AddressCreateView(LoginRequiredMixin, generic.CreateView):
     def post(self, request, *args, **kwargs):
-            form = AddressForm(request.POST)
-            if form.is_valid():
-                obj = form.save(commit=False)
-                obj.user = self.request.user
-                obj.save()
-                messages.success(self.request, "آدرس با موفقیت افزوده شد")
-            messages.error(request, "لطفا اطلاعات را به درستی وارد کنید")
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = self.request.user
+            messages.success(self.request, "آدرس با موفقیت افزوده شد")
             return redirect('cart-detail')
+        messages.error(self.request, "لطفا اطلاعات را به درستی وارد کنید")
+        return redirect('cart-detail')
