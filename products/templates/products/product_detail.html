@@ -278,8 +278,8 @@
                     </div>
 
                     <!-- left side -->
-{% if product.status == 'a' %}
-  <!-- فرم افزودن به سبد خرید -->
+                  {% if product.status == 'a' %}
+                    <!-- فرم افزودن به سبد خرید -->
                     <form action="{% url 'cart-add' product.id %}" method="post">
                       {% csrf_token %}
                     <div class="col-span-1 flex flex-col">
@@ -380,7 +380,7 @@
                               type="number"
                               class="flex h-6 w-6 w-full select-none items-center justify-center bg-transparent text-center outline-none"
                             />
-                            <button type="button" data-action="decrement">
+                            <button type="submit" data-action="decrement">
                               <svg class="h-6 w-6 text-red-600 dark:text-red-500">
                                 <use xlink:href="#minus" />
                               </svg>
@@ -735,24 +735,6 @@
                   تحویل اکسپرس در تهران, کرج
                 </div>
               </div>
-            </form>
-
-             </div>
-            <!-- Property -->
-            <div class="mb-6 rounded-lg bg-muted p-4 shadow-base lg:hidden">
-              <p class="mb-6">ویژگی های محصول</p>
-
-              <ul class="space-y-4">
-                {% for specification in product.specifications.all|slice:":5" %}
-                <li class="flex gap-x-2">
-                  <div class="min-w-fit text-sm text-text/60">{{ specification.key }} :</div>
-                  <div class="text-sm text-text/90">{{ specification.value }}</div>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-
-            <!-- Add to Cart -->
             <div class="fixed inset-x-0 bottom-0 z-10 bg-muted p-5">
               {% if product.status == 'a' %}
               <div class="flex items-center justify-between gap-x-6">
@@ -810,6 +792,25 @@
     </div>
     {% endif %}
             </div>
+
+            </form>
+
+             </div>
+            <!-- Property -->
+            <div class="mb-6 rounded-lg bg-muted p-4 shadow-base lg:hidden">
+              <p class="mb-6">ویژگی های محصول</p>
+
+              <ul class="space-y-4">
+                {% for specification in product.specifications.all|slice:":5" %}
+                <li class="flex gap-x-2">
+                  <div class="min-w-fit text-sm text-text/60">{{ specification.key }} :</div>
+                  <div class="text-sm text-text/90">{{ specification.value }}</div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <!-- Add to Cart -->
 
           </div>
             {% if related_p %}
