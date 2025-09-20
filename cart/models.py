@@ -49,7 +49,7 @@ class CartItem(models.Model):
         verbose_name=_("product"),
     )
     quantity = models.PositiveIntegerField(_("quantity"), default=1)
-    color = models.CharField(_("color"), max_length=10, null=True, blank=True)
+    color = models.CharField(_("color"), max_length=55, null=True, blank=True)
     size = models.CharField(_("size"), max_length=55, null=True, blank=True)
 
     def item_final_price(self):

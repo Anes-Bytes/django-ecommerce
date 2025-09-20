@@ -18,6 +18,8 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     # django apps
+    "jazzmin",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -35,6 +37,9 @@ INSTALLED_APPS = [
 
     # third party apps
     'jalali_date',
+    "crispy_forms",
+    "crispy_bootstrap5",
+
 ]
 
 MIDDLEWARE = [
@@ -99,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'utc'
 
@@ -125,3 +130,21 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = 'user-dashboard'
 LOGOUT_REDIRECT_URL = 'home'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "پنل مدیریت فروشگاه",
+    "site_header": "مدیریت فروشگاه",
+    "site_brand": "فروشگاه من",
+    "welcome_sign": "به پنل مدیریت خوش آمدید",
+    "copyright": "کپی‌رایت © 2025",
+
+    # تغییر رنگ‌ها
+    "theme": "lux",  # یا "cyborg" / "flatly" / "darkly" و ...
+
+    # تغییر لوگو
+    "site_logo": "images/logo.png",  # باید داخل static باشه
+}
