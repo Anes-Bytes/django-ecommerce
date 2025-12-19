@@ -7,9 +7,9 @@ env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = "dbdsfbhsdbksdjfsdb"
 
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -17,9 +17,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    # django apps
-    "jazzmin",
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,14 +75,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASSWORD"),
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -133,18 +126,3 @@ LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-
-JAZZMIN_SETTINGS = {
-    "site_title": "پنل مدیریت فروشگاه",
-    "site_header": "مدیریت فروشگاه",
-    "site_brand": "فروشگاه من",
-    "welcome_sign": "به پنل مدیریت خوش آمدید",
-    "copyright": "کپی‌رایت © 2025",
-
-    # تغییر رنگ‌ها
-    "theme": "lux",  # یا "cyborg" / "flatly" / "darkly" و ...
-
-    # تغییر لوگو
-    "site_logo": "images/logo.png",  # باید داخل static باشه
-}
